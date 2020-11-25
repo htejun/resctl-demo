@@ -8,15 +8,6 @@ checksum = "ee2a4ec343196209d6594e19543ae87a39f96d5534d7174822a3ad825dd6ed7e"
 
 [[package]]
 name = "ahash"
-version = "0.3.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e8fd72866655d1904d6b0997d0b07ba561047d070fbe29de039031c641b61217"
-dependencies = [
- "const-random",
-]
-
-[[package]]
-name = "ahash"
 version = "0.4.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f6789e291be47ace86a60303502173d84af8327e3627ecf334356ee0f87a164c"
@@ -359,11 +350,10 @@ dependencies = [
 
 [[package]]
 name = "cursive"
-version = "0.15.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7a9f12332ab2bca26979ef00cfef9a1c2e287db03b787a83d892ad9961f81374"
+version = "0.15.1-alpha.0"
+source = "git+https://github.com/gyscos/cursive.git?branch=main#b79ccf62da3d95db7b72e832eb019653c75bbd77"
 dependencies = [
- "ahash 0.3.8",
+ "ahash",
  "cfg-if 0.1.10",
  "crossbeam-channel 0.4.4",
  "cursive_core",
@@ -381,9 +371,8 @@ dependencies = [
 
 [[package]]
 name = "cursive-tabs"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "54395f99e84d46b2d66db5fb763d2e86635e58223a4cf8d1592eb6ad516a37e4"
+version = "0.5.1-alpha.0"
+source = "git+https://github.com/deinstapel/cursive-tabs.git?branch=bleeding-edge#18f8ade1c5d4e8f58b3465f935fc7be9aa97e6de"
 dependencies = [
  "crossbeam 0.7.3",
  "cursive_core",
@@ -394,10 +383,9 @@ dependencies = [
 [[package]]
 name = "cursive_core"
 version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "85fc5b6a8ba2f1bc743892068bde466438f78d6247197e2dc094bfd53fdea4b7"
+source = "git+https://github.com/gyscos/cursive.git?branch=main#b79ccf62da3d95db7b72e832eb019653c75bbd77"
 dependencies = [
- "ahash 0.4.6",
+ "ahash",
  "chrono",
  "crossbeam-channel 0.4.4",
  "enum-map",
@@ -1450,6 +1438,7 @@ dependencies = [
  "rd-agent-intf",
  "rd-hashd-intf",
  "tempfile",
+ "term_size",
  "util",
 ]
 
@@ -1586,9 +1575,9 @@ checksum = "6446ced80d6c486436db5c078dde11a9f73d42b57fb273121e160b84f63d894c"
 
 [[package]]
 name = "syn"
-version = "1.0.50"
+version = "1.0.51"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "443b4178719c5a851e1bde36ce12da21d74a0e60b4d982ec3385a933c812f0f6"
+checksum = "3b4f34193997d92804d359ed09953e25d5138df6bcc055a71bf68ee89fdf9223"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1705,9 +1694,9 @@ dependencies = [
 
 [[package]]
 name = "unicode-segmentation"
-version = "1.7.0"
+version = "1.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "db8716a166f290ff49dabc18b44aa407cb7c6dbe1aa0971b44b8a24b0ca35aae"
+checksum = "bb0d2e7be6ae3a5fa87eed5fb451aff96f2573d2694942e40543ae0bbe19c796"
 
 [[package]]
 name = "unicode-width"

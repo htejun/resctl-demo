@@ -286,7 +286,8 @@ pub fn kick_refresh(siv: &mut Cursive) {
 
 fn refresh_layout_and_kick(siv: &mut Cursive) {
     let mut layout = get_layout();
-    let scr = siv.screen_size();
+    let (x, y) = term_size::dimensions().unwrap_or((80, 24));
+    let scr = cursive::XY { x, y };
     if scr != layout.screen {
         *LAYOUT.lock().unwrap() = Layout::new(scr);
         layout = get_layout();
@@ -558,7 +559,6 @@ fn main() {
     });
     siv.add_global_callback(event::Event::CtrlChar('l'), |siv| {
         siv.clear();
-        siv.refresh();
     });
     siv.add_global_callback(event::Event::Key(event::Key::Esc), |siv| {
         AGENT_ZV_REQ.store(false, Ordering::Relaxed);
