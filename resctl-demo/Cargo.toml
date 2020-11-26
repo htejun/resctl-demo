@@ -15,10 +15,8 @@ anyhow = "^1.0"
 chrono = { version = "^0.4", features = ["serde"] }
 clap = "^2.33"
 crossbeam = "^0.8"
-#cursive = { git = "https://github.com/gyscos/cursive.git", branch = "main" }
-#cursive-tabs = { git = "https://github.com/deinstapel/cursive-tabs.git", branch = "bleeding-edge" }
-cursive = { path = "/home/htejun/tmp/cursive/cursive" }
-cursive-tabs = { path = "/home/htejun/tmp/cursive-tabs" }
+cursive = { git = "https://github.com/gyscos/cursive.git", branch = "main", default-features = false, features = ["termion-backend"] }
+cursive-tabs = { git = "https://github.com/deinstapel/cursive-tabs.git", branch = "bleeding-edge" }
 enum-iterator = "^0.6"
 env_logger = "^0.8"
 lazy_static = "^1.4"
