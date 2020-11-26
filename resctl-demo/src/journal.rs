@@ -12,8 +12,6 @@ use lazy_static::lazy_static;
 use log::info;
 use std::collections::VecDeque;
 use std::sync::Mutex;
-use std::thread::sleep;
-use std::time::{Duration, SystemTime};
 use util::journal_tailer::{JournalMsg, JournalTailer};
 
 use rd_agent_intf::{
@@ -25,9 +23,7 @@ use super::doc::{SIDELOAD_NAMES, SYSLOAD_NAMES};
 use super::{get_layout, COLOR_ALERT, COLOR_DFL, COLOR_INACTIVE, SVC_NAMES, UPDATERS};
 
 const JOURNAL_RETENTION: usize = 100;
-const JOURNAL_PERIOD: Duration = Duration::from_millis(100);
 const JOURNAL_FS_RETENTION: usize = 512;
-const JOURNAL_FS_PERIOD: Duration = Duration::from_millis(1000);
 
 lazy_static! {
     static ref FS_CUR: Mutex<String> = Mutex::new(AGENT_SVC_NAME.into());
@@ -106,7 +102,6 @@ impl Updater {
         cb_sink: CbSink,
         units: &[&str],
         retention: usize,
-        period: Duration,
         name: &str,
         panel_name: Option<&str>,
         long_fmt: bool,
@@ -120,19 +115,8 @@ impl Updater {
             tailer: JournalTailer::new(
                 units,
                 retention,
-                Box::new(move |msgs, flush| {
-                    if !flush {
-                        return;
-                    }
+                Box::new(move |msgs, _flush| {
                     Self::update(&cb_sink, msgs, &name, panel_name.as_deref(), long_fmt);
-
-                    if let Ok(latest) =
-                        SystemTime::now().duration_since(msgs.iter().last().unwrap().at)
-                    {
-                        if latest < Duration::from_secs(10) {
-                            sleep(period);
-                        }
-                    }
                 }),
             ),
         }
@@ -215,7 +199,6 @@ pub fn updater_factory(cb_sink: cursive::CbSink, id: JournalViewId) -> Vec<Updat
                     cb_sink.clone(),
                     &top_svcs,
                     JOURNAL_RETENTION,
-                    JOURNAL_PERIOD,
                     "journal-top",
                     None,
                     false,
@@ -224,7 +207,6 @@ pub fn updater_factory(cb_sink: cursive::CbSink, id: JournalViewId) -> Vec<Updat
                     cb_sink.clone(),
                     &bot_svcs,
                     JOURNAL_RETENTION,
-                    JOURNAL_PERIOD,
                     "journal-bot",
                     None,
                     false,
@@ -240,7 +222,6 @@ fn update_fs_journal(siv: &mut Cursive, name: &str) {
         siv.cb_sink().clone(),
         &[name],
         JOURNAL_FS_RETENTION,
-        JOURNAL_FS_PERIOD,
         "journal-fs",
         Some("journal-fs-panel"),
         true,
