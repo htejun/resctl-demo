@@ -351,7 +351,6 @@ dependencies = [
 [[package]]
 name = "cursive"
 version = "0.15.1-alpha.0"
-source = "git+https://github.com/gyscos/cursive.git?branch=main#b79ccf62da3d95db7b72e832eb019653c75bbd77"
 dependencies = [
  "ahash",
  "cfg-if 0.1.10",
@@ -372,7 +371,6 @@ dependencies = [
 [[package]]
 name = "cursive-tabs"
 version = "0.5.1-alpha.0"
-source = "git+https://github.com/deinstapel/cursive-tabs.git?branch=bleeding-edge#18f8ade1c5d4e8f58b3465f935fc7be9aa97e6de"
 dependencies = [
  "crossbeam 0.7.3",
  "cursive_core",
@@ -383,7 +381,6 @@ dependencies = [
 [[package]]
 name = "cursive_core"
 version = "0.1.1"
-source = "git+https://github.com/gyscos/cursive.git?branch=main#b79ccf62da3d95db7b72e832eb019653c75bbd77"
 dependencies = [
  "ahash",
  "chrono",
